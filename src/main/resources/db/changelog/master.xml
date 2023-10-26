@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <include file="db/changelog/currencies.xml"/>
+
+    <changeSet id="create.table.client" author="nikita.kuznecovs">
+        <createTable tableName="client">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_number" type="VARCHAR(255)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create.table.account" author="nikita.kuznecovs">
+        <createTable tableName="account">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_number" type="VARCHAR(255)"/>
+            <column name="ccy" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="DECIMAL(10, 2)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create.table.document" author="nikita.kuznecovs">
+        <createTable tableName="document">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="document_number" type="VARCHAR(255)"/>
+            <column name="transfer_type" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="amount" type="DECIMAL(10, 2)"/>
+            <column name="source_amount" type="DECIMAL(10, 2)"/>
+            <column name="target_amount" type="DECIMAL(10, 2)"/>
+            <column name="rate" type="DECIMAL(10, 4)"/>
+            <column name="ccy" type="VARCHAR(255)"/>
+            <column name="source_ccy" type="VARCHAR(255)"/>
+            <column name="target_ccy" type="VARCHAR(255)"/>
+            <column name="source_account_id" type="BIGINT"/>
+            <column name="target_account_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create.table.transaction" author="nikita.kuznecovs">
+        <createTable tableName="transaction">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="transaction_number" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="amount" type="DECIMAL(10, 2)"/>
+            <column name="account_id" type="BIGINT"/>
+            <column name="document_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
