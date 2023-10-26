@@ -12,8 +12,7 @@
    ```shell
    docker-compose up
 
-
-   ## Alternative Setup Steps
+## Alternative Setup Steps
 
  ```shell
    docker pull ghcr.io/nekitkee/fx-service:latest
