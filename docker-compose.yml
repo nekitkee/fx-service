@@ -10,6 +10,18 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+
+  fx_app:
+    image: fx-service-image
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fxservice
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - postgres
+
 volumes:
   db:
     driver: local
