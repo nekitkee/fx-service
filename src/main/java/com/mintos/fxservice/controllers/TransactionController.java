@@ -18,8 +18,8 @@ public class TransactionController {
 
     //?sort=createdAt,desc&size=5&page=3
     @GetMapping("/account/{accountNumber}/transactions")
-    public List<TransactionDto> getTransactionsByClientNumberPag(@PathVariable String accountNumber,
-                                                                 @PageableDefault(sort = "createdAt" , direction = Sort.Direction.DESC)
+    public List<TransactionDto> getTransactionsByAccountNumber(@PathVariable String accountNumber,
+                                                               @PageableDefault(sort = "createdAt" , direction = Sort.Direction.DESC)
                                                                  Pageable pageable) {
         return transactionHistoryManager.getTransactionsByAccount(accountNumber, pageable);
     }
